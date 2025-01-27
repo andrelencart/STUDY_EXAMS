@@ -34,6 +34,6 @@ int    ft_strcmp(char *s1, char *s2)
 
 int	main(void)
 {
-	printf("%d\n", strcmp("abc", "ab"));
-	printf("mine: %d\n", ft_strcmp("abc", "ab"));
+	printf("%d\n", strcmp("ab", "abc"));
+	printf("mine: %d\n", ft_strcmp("ab", "abc"));
 }
