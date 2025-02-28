@@ -17,8 +17,8 @@ unsigned char	reverse_bits(unsigned char octet)
 
 void	print_bits(unsigned char octet)
 {
-	int	i = 7;
 	unsigned char bit;
+	int i = 7;
 
 	while (i >= 0)
 	{
@@ -30,9 +30,10 @@ void	print_bits(unsigned char octet)
 
 int main()
 {
-	unsigned char octet = 3;
-	reverse_bits(octet);
-	print_bits(octet);
+	unsigned char octet = 2;
+	unsigned char rev;
+	rev = reverse_bits(octet);
+	print_bits(rev);
 	write(1, "\n", 1);
 
 }
