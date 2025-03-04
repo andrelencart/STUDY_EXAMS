@@ -1,18 +1,19 @@
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-int     *ft_range(int start, int end)
+int	*ft_range(int start, int end)
 {
 	int	*range;
-	int	len = end - start;
-	int i = 0;
+	int len = end - start;
+	int	i = 0;
 
 	if (len < 0)
 		len = -len;
 	len++;
-	range = malloc(sizeof(int) * len);
+	range = malloc(sizeof(int *) * len);
 	if (!range)
-		return(NULL);
+		return (NULL);
 	while (i < len)
 	{
 		if (start < end)
@@ -28,19 +29,19 @@ int     *ft_range(int start, int end)
 			i++;
 		}
 	}
-	return(range);
+	return (range);
 }
 
 int	main(void)
 {
-	int	end = 2;
 	int start = -1;
+	int	end = 2;
 	int	 *arr = ft_range(start, end);
 	int	i = 0;
 
 	while (start <= end)
 	{
-		printf("%d\n", arr[i]);
+		printf("%d, ", arr[i]);
 		i++;
 		start++;
 	}

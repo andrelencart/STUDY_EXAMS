@@ -21,6 +21,6 @@ size_t	ft_strspn(const char *s, const char *accept)
 
 int	main(void)
 {
-	printf("%ld\n", strspn("aaabcd", "abcdb"));
-	printf("mine: %ld\n", ft_strspn("aaabcd", "abcdb"));
+	printf("%s\n", strspn("aaabcd", "abcdb"));
+	printf("mine: %s\n", ft_strspn("aaabcd", "abcd"));
 }
