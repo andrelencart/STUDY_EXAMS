@@ -1,9 +1,12 @@
 #include <stdio.h>
-unsigned int	lcm(unsigned int a, unsigned int b)
+
+unsigned int    lcm(unsigned int a, unsigned int b)
 {
 	unsigned int i = 1;
 	unsigned int hcf = 0;
 
+	if (a == 0 || b == 0)
+		return (0);
 	while (i <= a || i <= b)
 	{
 		if (a % i == 0 && b % i == 0)
@@ -15,5 +18,5 @@ unsigned int	lcm(unsigned int a, unsigned int b)
 
 int main(void)
 {
-	printf("%d\n", lcm(0, 3));
+	printf("%d\n", lcm(5, 3));
 }

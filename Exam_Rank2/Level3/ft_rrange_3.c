@@ -1,12 +1,11 @@
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-int	*ft_rrange(int start, int end)
+int     *ft_rrange(int start, int end)
 {
-	int	i = 0;
-	int	*range;
 	int	len = end - start;
+	int *range;
+	int i = 0;
 
 	if (len < 0)
 		len = -len;
@@ -22,7 +21,7 @@ int	*ft_rrange(int start, int end)
 			end--;
 			i++;
 		}
-		else
+		else	
 		{
 			range[i] = end;
 			end++;
@@ -45,4 +44,5 @@ int	main(void)
 		i++;
 		start--;
 	}
+
 }
