@@ -1,17 +1,17 @@
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <stdio.h>
 
 int picoshell(char **cmds[])
 {
 	int	i = 0;
-	int	pid;
 	int	fd[2];
-	int	res;
+	int	pid;
 	int	status;
+	int	res;
 
-	while (cmds[i])
+	while(cmds[i])
 	{
 		if (cmds[i + 1])
 		{
@@ -25,9 +25,9 @@ int picoshell(char **cmds[])
 				close(fd[0]);
 			if (fd[1] >= 0)
 				close(fd[1]);
-			return 1;
+			return(1);
 		}
-		if (pid == 0)
+		if(pid == 0)
 		{
 			if (cmds[i + 1])
 			{
@@ -36,7 +36,7 @@ int picoshell(char **cmds[])
 					exit(1);
 				close(fd[1]);
 			}
-			execvp(cmds[i][0], cmds[1]);
+			execvp(cmds[i][0], cmds[i]);
 			exit(1);
 		}
 		else{
@@ -50,11 +50,11 @@ int picoshell(char **cmds[])
 		}
 		i++;
 	}
-	while(wait(&status) > 0)
+	while (wait(&status) > 0)
 	{
-		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		if (WIFEXITED(status) && (WEXITSTATUS(status) != 0))
 			res = 1;
-		else if (!WIFEXITED(status))
+		if (!WIFEXITED(status))
 			res = 1;
 	}
 	return (res);

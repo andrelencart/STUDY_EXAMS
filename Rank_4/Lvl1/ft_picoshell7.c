@@ -6,14 +6,14 @@
 int picoshell(char **cmds[])
 {
 	int	i = 0;
-	int	pid;
 	int	fd[2];
-	int	res;
+	int	pid;
 	int	status;
+	int	res;
 
 	while (cmds[i])
 	{
-		if (cmds[i + 1])
+		if(cmds[i + 1])
 		{
 			if (pipe(fd) < 0)
 				return 1;
@@ -36,7 +36,7 @@ int picoshell(char **cmds[])
 					exit(1);
 				close(fd[1]);
 			}
-			execvp(cmds[i][0], cmds[1]);
+			execvp(cmds[i][0], cmds[i]);
 			exit(1);
 		}
 		else{
@@ -50,7 +50,7 @@ int picoshell(char **cmds[])
 		}
 		i++;
 	}
-	while(wait(&status) > 0)
+	while (wait(&status) > 0)
 	{
 		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 			res = 1;

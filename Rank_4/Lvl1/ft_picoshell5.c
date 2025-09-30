@@ -25,6 +25,7 @@ int picoshell(char **cmds[])
 				close(fd[0]);
 			if (fd[1] >= 0)
 				close(fd[1]);
+			return 1;
 		}
 		if (pid == 0)
 		{
