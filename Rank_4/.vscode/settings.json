@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"stdlib.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"wait.h": "c"
 	}
 }

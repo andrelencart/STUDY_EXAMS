@@ -15,9 +15,10 @@ typedef struct node {
     struct node *r;
 }   node;
 
-node	*parse_factor(char **s);
-node	*parse_term(char **s);
-node	*parse_expr_r(char **s);
+
+node *parse_expr_r(char **s);
+node *parse_factor(char **s);
+node *parse_term(char **s);
 
 node    *new_node(node n)
 {
@@ -66,7 +67,7 @@ int expect(char **s, char c)
     return (0);
 }
 
-node	*parse_factor(char **s)
+node *parse_factor(char **s)
 {
 	if (isdigit((unsigned char)**s)){
 		node n = {.type = VAL, .val = **s - '0', .l = NULL, .r = NULL};
@@ -76,9 +77,8 @@ node	*parse_factor(char **s)
 	if (accept(s, '(')){
 		node *e = parse_expr_r(s);
 		if (!e)
-			return (NULL);
-		if (!expect(s, ')'))
-		{
+			return NULL;
+		if (!expect(s, ')')){
 			destroy_tree(e);
 			return NULL;
 		}

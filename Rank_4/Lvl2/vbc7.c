@@ -15,9 +15,10 @@ typedef struct node {
     struct node *r;
 }   node;
 
-node	*parse_factor(char **s);
-node	*parse_term(char **s);
-node	*parse_expr_r(char **s);
+
+node *parse_factor(char **s);
+node *parse_term(char **s);
+node *parse_expr_r(char **s);
 
 node    *new_node(node n)
 {
@@ -66,7 +67,7 @@ int expect(char **s, char c)
     return (0);
 }
 
-node	*parse_factor(char **s)
+node *parse_factor(char **s)
 {
 	if (isdigit((unsigned char)**s)){
 		node n = {.type = VAL, .val = **s - '0', .l = NULL, .r = NULL};
@@ -76,9 +77,8 @@ node	*parse_factor(char **s)
 	if (accept(s, '(')){
 		node *e = parse_expr_r(s);
 		if (!e)
-			return (NULL);
-		if (!expect(s, ')'))
-		{
+			return NULL;
+		if (!expect(s, ')')){
 			destroy_tree(e);
 			return NULL;
 		}
@@ -88,19 +88,19 @@ node	*parse_factor(char **s)
 	return NULL;
 }
 
-node	*parse_term(char **s)
+node *parse_term(char **s)
 {
 	node *left = parse_factor(s);
 	if (!left)
 		return NULL;
 	while (accept(s, '*'))
 	{
-		node *right = parse_factor(s);
-		if (!right){
+		node *righ = parse_factor(s);
+		if (!righ){
 			destroy_tree(left);
 			return NULL;
 		}
-		node n = {.type = MULTI, .l = left, .r = right};
+		node n = {.type = MULTI, .l = left, .r = righ};
 		left = new_node(n);
 		if (!left)
 			return NULL;
@@ -108,19 +108,19 @@ node	*parse_term(char **s)
 	return (left);
 }
 
-node	*parse_expr_r(char **s)
+node *parse_expr_r(char **s)
 {
 	node *left = parse_term(s);
 	if (!left)
 		return NULL;
 	while (accept(s, '+'))
 	{
-		node *right = parse_term(s);
-		if (!right){
+		node *righ = parse_term(s);
+		if (!righ){
 			destroy_tree(left);
 			return NULL;
 		}
-		node n = {.type = ADD, .l = left, .r = right};
+		node n = {.type = ADD, .l = left, .r = righ};
 		left = new_node(n);
 		if (!left)
 			return NULL;
@@ -130,11 +130,11 @@ node	*parse_expr_r(char **s)
 
 node    *parse_expr(char *s)
 {
-    char *p = s;
+	char *p = s;
 	node *ret = parse_expr_r(&p);
 
 	if (!ret)
-		return (NULL);
+		return NULL;
     if (*p) 
     {
 		unexpected(*p);

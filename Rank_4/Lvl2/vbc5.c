@@ -92,7 +92,7 @@ node	*parse_term(char **s)
 	node *left = parse_factor(s);
 	if (!left)
 		return NULL;
-	if (accept(s, '*')){
+	while (accept(s, '*')){
 		node *right = parse_factor(s);
 		if (!right){
 			destroy_tree(left);
@@ -111,7 +111,7 @@ node	*parse_expr_r(char **s)
 	node *left = parse_term(s);
 	if (!left)
 		return NULL;
-	if (accept(s, '+')){
+	while (accept(s, '+')){
 		node *right = parse_term(s);
 		if (!right){
 			destroy_tree(left);

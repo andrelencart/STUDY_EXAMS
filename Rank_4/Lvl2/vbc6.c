@@ -15,9 +15,9 @@ typedef struct node {
     struct node *r;
 }   node;
 
-node	*parse_factor(char **s);
-node	*parse_term(char **s);
-node	*parse_expr_r(char **s);
+node *parse_expr_r(char **s);
+node *parse_term(char **s);
+node *parse_factor(char **s);
 
 node    *new_node(node n)
 {
@@ -66,6 +66,7 @@ int expect(char **s, char c)
     return (0);
 }
 
+
 node	*parse_factor(char **s)
 {
 	if (isdigit((unsigned char)**s)){
@@ -77,8 +78,7 @@ node	*parse_factor(char **s)
 		node *e = parse_expr_r(s);
 		if (!e)
 			return (NULL);
-		if (!expect(s, ')'))
-		{
+		if (!expect(s, ')')){
 			destroy_tree(e);
 			return NULL;
 		}
@@ -88,13 +88,12 @@ node	*parse_factor(char **s)
 	return NULL;
 }
 
-node	*parse_term(char **s)
+node *parse_term(char **s)
 {
 	node *left = parse_factor(s);
 	if (!left)
 		return NULL;
-	while (accept(s, '*'))
-	{
+	while (accept(s, '*')){
 		node *right = parse_factor(s);
 		if (!right){
 			destroy_tree(left);
@@ -108,13 +107,12 @@ node	*parse_term(char **s)
 	return (left);
 }
 
-node	*parse_expr_r(char **s)
+node *parse_expr_r(char **s)
 {
 	node *left = parse_term(s);
 	if (!left)
 		return NULL;
-	while (accept(s, '+'))
-	{
+	while (accept(s, '+')){
 		node *right = parse_term(s);
 		if (!right){
 			destroy_tree(left);
@@ -135,7 +133,7 @@ node    *parse_expr(char *s)
 
 	if (!ret)
 		return (NULL);
-    if (*p) 
+    if (*p)
     {
 		unexpected(*p);
         destroy_tree(ret);
