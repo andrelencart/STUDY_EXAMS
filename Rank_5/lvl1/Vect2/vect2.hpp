@@ -14,6 +14,7 @@ class vect2{
 		vect2(const vect2 &copy);
 		~vect2();
 
+		//vect2 operator+() const;
 		vect2 operator+(const vect2 &other) const;
 		vect2 operator-() const;
 		vect2 operator-(const vect2 &other) const;
