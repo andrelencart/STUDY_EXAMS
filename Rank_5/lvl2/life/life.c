@@ -106,7 +106,7 @@ int main(int ac, char **av) { // Needs checks in calloc for allocatio errors
 		return 1;
 	}
 
-	t_life life={atoi(av[1]),atoi(av[2]) , atoi(av[3]), NULL, 0};
+	t_life life={atoi(av[1]), atoi(av[2]) , atoi(av[3]), NULL, 0};
 	life.map = calloc(sizeof(char **), life.y + 1);
 	for (int hy = 0; hy < life.y; hy++){
 		life.map[hy] = calloc(sizeof(char), life.x + 1);
